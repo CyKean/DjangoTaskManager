@@ -1,0 +1,120 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Task Manager{% endblock %}</title>
+</head>
+
+<body>
+<div class="container">
+    <div class="head">
+        <div class="authenticate">
+            <a href="{% url 'login' %}">Log in</a>
+            <a href="{% url 'signup' %}">Sign up</a>
+        </div>
+    </div>
+    <div class="navigation">
+        <nav>
+            <ul>
+                <li><a>Home</a></li>
+                <li><a>Upcoming</a></li>
+                <li><a>Past Due</a></li>
+                <li><a>Completed</a></li>
+            </ul>
+        </nav>
+    </div>
+</div>
+<div class="content">
+   <p>Log in or Sign up to Create Tasks</p>
+</div>
+
+<style>
+    body {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: black;
+    font-family: 'Century Gothic', sans-serif;
+}
+ul, li {
+    list-style: none;
+    padding-bottom: 10px;
+}
+.content {
+    border-radius: 10px;
+    background-color: white;
+    margin-left: 10px;
+    margin-right: 10px;
+    width: calc(100% - 20px); /* 100% ng screen width minus ang combined margin-left at margin-right */
+    height: 610px;
+    flex: 1;
+}
+.content p {
+    padding-left: 40px;
+    padding-top: 280px;
+    color: gray;
+}
+.head {
+    flex: 1;
+}
+.authenticate {
+    height: 40px;
+    width: 160px;
+    background-color: rgb(67, 67, 67);
+    padding-left: 10px;
+    padding-right: inherit;
+    border-radius: 40px;
+    display: flex;
+}
+.authenticate a {
+    text-decoration: none;
+    color: white;
+    padding-top: 9px;
+    padding-left: 15px;
+    transition: color 0.5;
+}
+.authenticate a:hover {
+    color: blue;
+}
+h3 {
+    color:white;
+    margin-right: 20px;
+}
+.picture {
+    width: 40px;
+    height: 40px;
+    background-color: aliceblue;
+    margin-right: 10px;
+    margin-top: 10px;
+    border-radius: 20px;
+}
+.navigation {
+    background-color: rgb(67, 67, 67);
+    border-radius: 10px;
+    padding-top: 8px;
+    margin-top: 8px;
+    text-align: center;
+    flex: 1;
+}
+.navigation ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.navigation a {
+    text-decoration: none;
+    color: #fffcfc;
+    transition: color 0.3s; 
+}
+.navigation a:hover {
+    color: #0066cc; 
+}
+.picture {
+        position: relative;
+        z-index: 1; /* Para masiguradong ito ang nasa ibabaw ng "logout" div */
+    }
+
+</style>
+</body>
+</html>

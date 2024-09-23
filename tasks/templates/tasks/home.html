@@ -1,0 +1,133 @@
+{% extends 'tasks/base.html' %}
+
+{% block content %}
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<div class="home_head">
+    <h1>Home Page</h1>
+    <h2>Your Tasks</h2>
+    <a href="{% url 'add_task' %}">Add task</a>
+</div>
+<div class="home_container">
+    {% for task in tasks %}
+        <form method="post" action="{% url 'update_task_status' task.id %}">
+            {% csrf_token %}
+            <li>
+                <div class="home_content">
+                    <div class="checkbox">
+                        <input type="checkbox" name="completed" {% if task.completed %}checked{% endif %} onchange="this.form.submit()">
+                        <h1>{{ task.title }}</h1>
+                    </div>
+                    <div class="details">
+                        <div class="description">
+                            <h3>{{ task.description }}</h3> 
+                        </div>
+                        <div class="due">
+                            <h4>{{ task.due_date }}</h4>
+                        </div>
+                            <input type="hidden" name="completed_date" value="{{ form.completed_date.value }}">
+                            <button type="submit" style="display: none;">Update</button>
+                    </div>
+                    <div class="button">
+                        <a href="{% url 'edit_task' task.id %}">Edit</a>
+                        <a href="{% url 'delete_task' task.id %}">Delete</a>
+                    </div>
+                </div>
+            </li>
+        </form>
+    {% endfor %}
+</div>
+
+<style>
+.description {
+    h3 {
+        font-weight: 50;
+        padding-left: 10px;
+    }
+}
+.due {
+    padding-top: 20px;
+    
+    h4 {
+        font-size: 13px;
+    }
+}
+.home_container {
+    height: 430px;
+    overflow-y: auto;
+    border-radius: 30px;
+    flex: 1;
+    padding-left: 10px;
+}
+.home_head h1 {
+    padding-left: 80px;
+}
+.home_head h2 {
+    padding-left: 50px;
+}
+.home_head a {
+    text-decoration: none;
+    padding-left: 30px;
+    transition: color 0.5s;
+    color: blue;
+}
+.home_head a:hover {
+    color: red;
+}
+.home_content {
+    background-color: rgba(128, 128, 128, 0.522);
+    width: calc(100% - 20px); /* I-adjust ang width para magkaruon ng 10px space sa magkabilang dulo */
+    height: auto;
+    padding-left: 20px;
+    padding-bottom: 20px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    flex: 1;
+}
+.home_container::-webkit-scrollbar {
+    width: 10px;
+}
+.home_container::-webkit-scrollbar-thumb {
+    background-color: transparent; 
+}
+.button a {
+    text-decoration: none;
+    margin-right: 20px;
+    color: blue;
+    transition: color 0.5s;
+}
+.button a:hover {
+    color: red;
+}
+.checkbox {
+    display: flex;
+}
+.checkbox h1 {
+    margin-left: 20px;
+    font-size: 25px;
+    height: 20px;
+}
+
+</style>
+
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+    var homeContainer = document.querySelector('.home_container');
+
+    if (homeContainer.scrollHeight > homeContainer.clientHeight) {
+        // May scrollbar, pwede mong baguhin ang padding-right
+        homeContainer.style.paddingRight = '0';
+    } else {
+        // Wala pang scrollbar, panatilihin ang original na padding-right
+        homeContainer.style.paddingRight = '10px';
+    }
+});
+</script>
+</body>
+{% endblock %}
+
+
+
+        

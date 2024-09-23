@@ -1,0 +1,63 @@
+{% block content %}
+
+<div class="container">
+    <div class="form">
+        <h1>Log in</h1>
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <label for="username_email">Username or Email:</label>
+            <input type="text" id="username_email" name="username_email" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit">Log in</button>
+        </form>
+    </div>
+</div>   
+<style>
+h1 {
+    font-family: "Century Gothic", sans-serif;
+    padding-top: 150px;
+    text-align: center;
+}
+.form {
+    padding-top: 0px;
+}
+    form {
+    max-width: 300px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: "Century Gothic", sans-serif;
+}
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+button {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    width: 100%;
+}
+button:hover {
+    background-color: #45a049;
+}
+</style>
+{% endblock %}
+

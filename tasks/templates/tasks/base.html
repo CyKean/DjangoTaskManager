@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Task Manager{% endblock %}</title>
+</head>
+
+<body>
+<div class="container">
+    <div class="head">
+        <div class="authenticate">
+            {% if user.is_authenticated %}
+          
+                <div class="picture" onclick="showLogout()"></div>
+                <h3>{{ user.username }}</h3>
+                <div class="logout" id="logoutDiv">
+                    <a href="{% url 'logout' %}">Logout</a>
+                </div>
+        
+            {% else %}
+            <h3>Create an account to save your tasks..:></h3>
+            <a href="{% url 'login' %}">Log in</a>
+            <a href="{% url 'signup' %}">Sign up</a>
+            {% endif %}
+        </div>
+    </div>
+    <div class="navigation">
+        <nav>
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'upcoming' %}">Upcoming</a></li>
+                <li><a href="{% url 'past_due' %}">Past Due</a></li>
+                <li><a href="{% url 'completed' %}">Completed</a></li>
+            </ul>
+        </nav>
+    </div>
+</div>
+<div class="content">
+    {% block content %}
+    {% endblock %}
+</div>
+
+<style>
+    body {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: black;
+    font-family: 'Century Gothic', sans-serif;
+}
+ul, li {
+    list-style: none;
+    padding-bottom: 10px;
+}
+.content {
+    border-radius: 10px;
+    background-color: white;
+    margin-left: 10px;
+    margin-right: 10px;
+    width: calc(100% - 20px); /* 100% ng screen width minus ang combined margin-left at margin-right */
+    height: 610px;
+    flex: 1;
+}
+.head {
+    flex: 1;
+}
+.authenticate {
+    background-color: rgb(67, 67, 67);
+    padding-left: 10px;
+    padding-right: inherit;
+    border-radius: 40px;
+    display: flex;
+}
+h3 {
+    color:white;
+    margin-right: 20px;
+}
+.picture {
+    width: 40px;
+    height: 40px;
+    background-color: aliceblue;
+    margin-right: 10px;
+    margin-top: 10px;
+    border-radius: 20px;
+}
+.navigation {
+    background-color: rgb(67, 67, 67);
+    border-radius: 10px;
+    padding-top: 8px;
+    margin-top: 8px;
+    text-align: center;
+    flex: 1;
+}
+.navigation ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.navigation a {
+    text-decoration: none;
+    color: #fffcfc;
+    transition: color 0.3s; 
+}
+.navigation a:hover {
+    color: #0066cc; 
+}
+.picture {
+        position: relative;
+        z-index: 1; /* Para masiguradong ito ang nasa ibabaw ng "logout" div */
+    }
+
+    .logout {
+        height: 40px;
+        width: 100px;
+        border-radius: 10px;
+        background-color: gray;
+        display: none;
+        position: absolute;
+        padding-left: 45px;
+        padding-top: 18px;
+        top: 60px;
+        left: 20px;
+        z-index: 0;
+    }
+    .logout a {
+        padding-top: 20px;
+        text-decoration: none;
+        color: white;
+        transition: color 0.5;
+    }
+    .logout a:hover {
+        color: blue;
+    }
+</style>
+
+<script>
+    function showLogout() {
+        var logoutDiv = document.getElementById('logoutDiv');
+        if (logoutDiv.style.display === 'none') {
+            logoutDiv.style.display = 'block';
+        } else {
+            logoutDiv.style.display = 'none';
+        }
+    }
+</script>
+</body>
+</html>

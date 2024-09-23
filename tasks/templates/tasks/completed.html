@@ -1,0 +1,89 @@
+{% extends 'tasks/base.html' %}
+
+{% block content %}
+<h2>Completed Tasks</h2>
+    <div class="completed_container">
+        {% for task in completed %}
+        <li>
+            <div class="completed_content">
+                <div class="checkbox">
+                    <h1>{{ task.title }}</h1>
+                </div>
+                <div class="details">
+                    <div class="description">
+                        <h3>{{ task.description }}</h3> 
+                    </div>
+                    <div class="due">
+                        <h4>{{ task.completed_date }}</h4>
+                    </div>
+                </div>
+            </div>
+        </li>
+        {% endfor %}
+    </div>
+
+<style>
+h2 {
+    font-size: 30px;
+    padding-left: 50px;
+}
+.completed_container {
+    height: 530px;
+    overflow-y: auto;
+    border-radius: 30px;
+    flex: 1;
+    padding-left: 10px;
+}
+.completed_container::-webkit-scrollbar {
+    width: 10px;
+}
+.completed_container::-webkit-scrollbar-thumb {
+    background-color: transparent; 
+}
+.completed_content {
+    background-color: rgba(128, 128, 128, 0.522);
+    width: calc(100% - 20px); /* I-adjust ang width para magkaruon ng 10px space sa magkabilang dulo */
+    height: auto;
+    padding-left: 20px;
+    padding-bottom: 20px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    flex: 1;
+}
+.description {
+    h3 {
+        font-weight: 50;
+        padding-left: 10px;
+    }
+}
+.due {
+    padding-top: 20px;
+    
+    h4 {
+        font-size: 13px;
+    }
+}
+.checkbox {
+    display: flex;
+}
+.checkbox h1 {
+    margin-left: 20px;
+    font-size: 25px;
+    height: 20px;
+}
+</style>
+
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+  var homeContainer = document.querySelector('.completed_container');
+
+  if (homeContainer.scrollHeight > homeContainer.clientHeight) {
+      // May scrollbar, pwede mong baguhin ang padding-right
+      homeContainer.style.paddingRight = '0';
+  } else {
+      // Wala pang scrollbar, panatilihin ang original na padding-right
+      homeContainer.style.paddingRight = '10px';
+  }
+});
+</script>
+{% endblock %}
